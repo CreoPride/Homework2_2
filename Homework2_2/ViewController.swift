@@ -18,9 +18,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        redLabel.alpha = 0.3
-        yellowLabel.alpha = 0.3
-        greenLabel.alpha = 0.3
+
+        redLabel.fadeOut()
+        yellowLabel.fadeOut()
+        greenLabel.fadeOut()
 
         startButton.layer.cornerRadius = 10
         startButton.setTitle("START", for: .normal)
@@ -57,14 +58,14 @@ class ViewController: UIViewController {
 
 extension ViewController {
 
-    enum LabelColor {
+    private enum LabelColor {
         case red, yellow, green
     }
 }
 
 extension UIView {
 
-    func fadeIn(duration: TimeInterval = 1.0, alpha: CGFloat = 1) {
+    func fadeIn(duration: TimeInterval = 0, alpha: CGFloat = 1) {
         UIView.animate(withDuration: duration, animations: {
             self.alpha = alpha
         })
