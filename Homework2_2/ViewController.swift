@@ -35,30 +35,22 @@ class ViewController: UIViewController {
     @IBAction func startButtonTaped() {
         if startButton.titleLabel?.text == "START" {
             startButton.setTitle("NEXT", for: .normal)
-            UIView.animate(withDuration: 1) {
-                self.redLabel.alpha = 1
-            }
+            redLabel.fadeIn()
             return
         }
         switch activeLabel {
         case .red:
             activeLabel = .yellow
-            UIView.animate(withDuration: 1) {
-                self.redLabel.alpha = 0.3
-                self.yellowLabel.alpha = 1
-            }
+            redLabel.fadeOut()
+            yellowLabel.fadeIn()
         case .yellow:
             activeLabel = .green
-            UIView.animate(withDuration: 1) {
-                self.yellowLabel.alpha = 0.3
-                self.greenLabel.alpha = 1
-            }
+            yellowLabel.fadeOut()
+            greenLabel.fadeIn()
         case .green:
             activeLabel = .red
-            UIView.animate(withDuration: 1) {
-                self.greenLabel.alpha = 0.3
-                self.redLabel.alpha = 1
-            }
+            greenLabel.fadeOut()
+            redLabel.fadeIn()
         }
     }
 }
@@ -67,5 +59,20 @@ extension ViewController {
 
     enum LabelColor {
         case red, yellow, green
+    }
+}
+
+extension UIView {
+
+    func fadeIn(duration: TimeInterval = 1.0, alpha: CGFloat = 1) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = alpha
+        })
+    }
+
+    func fadeOut(duration: TimeInterval = 1.0, alpha: CGFloat = 0.3) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = alpha
+        })
     }
 }
